@@ -22,7 +22,7 @@ The Annotation Context Ontology (ACO) is a comprehensive framework for represent
 ### Installation
 
 ```bash
-git clone https://github.com/yourusername/annotation-context-ontology.git
+git clone https://github.com/kurtcagle/annotation-context-ontology.git
 cd annotation-context-ontology
 ```
 
