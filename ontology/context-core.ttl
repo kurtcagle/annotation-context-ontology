@@ -1,0 +1,46 @@
+@prefix ctx: <http://ontologist.substack.com/ns/context#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://ontologist.substack.com/ns/context#> a owl:Ontology ;
+    rdfs:label "Annotation Context Ontology"@en ;
+    rdfs:comment "Framework for representing contextual truth in RDF"@en ;
+    owl:versionInfo "1.0.0" .
+
+# Core Classes
+ctx:Context a rdfs:Class, owl:Class ;
+    rdfs:label "Context"@en ;
+    rdfs:comment "A scope or situation within which statements hold"@en .
+
+# Properties
+ctx:holdsIn a rdf:Property, owl:ObjectProperty ;
+    rdfs:label "holds in"@en ;
+    rdfs:comment "The statement is true within this context"@en ;
+    rdfs:domain rdf:Statement ;
+    rdfs:range ctx:Context .
+
+ctx:failsIn a rdf:Property, owl:ObjectProperty ;
+    rdfs:label "fails in"@en ;
+    rdfs:comment "The statement is false within this context"@en ;
+    rdfs:domain rdf:Statement ;
+    rdfs:range ctx:Context .
+
+ctx:subsumes a rdf:Property, owl:ObjectProperty, owl:TransitiveProperty ;
+    rdfs:label "subsumes"@en ;
+    rdfs:comment "This context includes the other context"@en ;
+    rdfs:domain ctx:Context ;
+    rdfs:range ctx:Context .
+
+ctx:excludes a rdf:Property, owl:ObjectProperty, owl:SymmetricProperty ;
+    rdfs:label "excludes"@en ;
+    rdfs:comment "This context is incompatible with the other"@en ;
+    rdfs:domain ctx:Context ;
+    rdfs:range ctx:Context .
+
+ctx:confidence a rdf:Property, owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:label "confidence"@en ;
+    rdfs:comment "Degree of confidence (0.0-1.0)"@en ;
+    rdfs:domain rdf:Statement ;
+    rdfs:range xsd:decimal .

@@ -1,0 +1,31 @@
+Annotation Context Ontology (ACO)
+Version: 1.0.0
+Release Date: 2026-02-05
+License: MIT
+
+Description:
+A comprehensive framework for representing contextual truth in RDF data using 
+RDF-star annotations. ACO enables statements to be annotated with conditions 
+under which they hold true, fail, or remain undefined.
+
+Key Features:
+- RDF-star native annotation syntax
+- Multiple context types (temporal, spatial, epistemic, modal)
+- Comprehensive SHACL 1.2 validation
+- Automatic inference rules
+- Integration with W3C standards (PROV, OWL-Time)
+
+Repository Contents:
+- Complete ontology definitions
+- SHACL validation shapes and rules  
+- Comprehensive documentation (SPECIFICATION.md, PRIMER.md)
+- Working examples
+- Validation scripts
+
+Requirements:
+- RDF 1.2 / RDF-star compatible triple store
+- Turtle 1.2 parser
+- SHACL 1.2 validator
+- SPARQL 1.1+ query engine
+
+For more information, see README.md

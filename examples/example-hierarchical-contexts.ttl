@@ -1,0 +1,28 @@
+@prefix ctx: <http://ontologist.substack.com/ns/context#> .
+@prefix animal: <http://example.org/animal/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Define hierarchical contexts
+ctx:AllAnimals a ctx:Context ;
+    rdfs:label "All Animals" .
+
+ctx:Vertebrates a ctx:Context ;
+    rdfs:label "Vertebrates" .
+
+ctx:Mammals a ctx:Context ;
+    rdfs:label "Mammals" .
+
+# Set up hierarchy
+ctx:AllAnimals ctx:subsumes ctx:Vertebrates .
+ctx:Vertebrates ctx:subsumes ctx:Mammals .
+
+# Statement at specific level
+:Human animal:hasBackbone true 
+    ~ {| 
+        ctx:holdsIn ctx:Mammals ;
+        rdfs:comment "Humans are mammals and have backbones"
+    |} .
+
+# This statement also holds in:
+# - ctx:Vertebrates (inferred)
+# - ctx:AllAnimals (inferred)

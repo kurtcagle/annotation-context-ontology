@@ -1,0 +1,28 @@
+@prefix ctx: <http://ontologist.substack.com/ns/context#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Core Context Shape
+ctx:ContextShape a sh:NodeShape ;
+    sh:targetClass ctx:Context ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 3 ;
+        sh:maxLength 200 ;
+        sh:message "Context must have exactly one label between 3-200 characters" ;
+    ] ;
+    sh:sparql [
+        sh:message "A context cannot subsume itself" ;
+        sh:select """
+            PREFIX ctx: <http://ontologist.substack.com/ns/context#>
+            SELECT $this
+            WHERE {
+                $this ctx:subsumes $this .
+            }
+        """ ;
+    ] .

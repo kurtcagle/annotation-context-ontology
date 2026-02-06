@@ -1,0 +1,29 @@
+@prefix ctx: <http://ontologist.substack.com/ns/context#> .
+@prefix dragon: <http://example.org/dragons/> .
+@prefix animal: <http://example.org/animal/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+# Define temporal contexts
+ctx:JuvenileStage a ctx:TemporalContext ;
+    rdfs:label "Juvenile Stage" ;
+    ctx:requires [ animal:ageInYears [ sh:maxExclusive 100 ] ] .
+
+ctx:AdultStage a ctx:TemporalContext ;
+    rdfs:label "Adult Stage" ;
+    ctx:requires [ animal:ageInYears [ sh:minInclusive 100 ] ] .
+
+# Contextual assertions
+dragon:Smaug a animal:Dragon .
+
+dragon:Smaug animal:hasLength 8 
+    ~ _:juvenile {| 
+        ctx:holdsIn ctx:JuvenileStage ;
+        ctx:confidence 0.92
+    |} .
+
+dragon:Smaug animal:hasLength 23 
+    ~ _:adult {| 
+        ctx:holdsIn ctx:AdultStage ;
+        ctx:confidence 0.98
+    |} .

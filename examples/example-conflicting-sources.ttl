@@ -1,0 +1,27 @@
+@prefix ctx: <http://ontologist.substack.com/ns/context#> .
+@prefix dragon: <http://example.org/dragons/> .
+@prefix animal: <http://example.org/animal/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Define epistemic contexts
+ctx:TolkienCanon a ctx:EpistemicContext ;
+    rdfs:label "Tolkien Canon" .
+
+ctx:WelshMythology a ctx:EpistemicContext ;
+    rdfs:label "Welsh Mythology" .
+
+# Conflicting measurements
+dragon:Welsh animal:hasMaxLength 23 
+    ~ {| 
+        ctx:holdsIn ctx:TolkienCanon ;
+        ctx:confidence 0.9 ;
+        prov:wasAttributedTo :JRRTolkien
+    |} .
+
+dragon:Welsh animal:hasMaxLength 21 
+    ~ {| 
+        ctx:holdsIn ctx:WelshMythology ;
+        ctx:confidence 0.6 ;
+        prov:wasAttributedTo :MabinogionScribe
+    |} .
